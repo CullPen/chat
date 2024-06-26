@@ -1,27 +1,25 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const chatBox = document.getElementById('chat-box');
-    const messageInput = document.getElementById('message-input');
-    const sendButton = document.getElementById('send-button');
+document.addEventListener("DOMContentLoaded", () => {
+    const chatWindow = document.getElementById("chat-window");
+    const messageInput = document.getElementById("message-input");
+    const sendButton = document.getElementById("send-button");
 
-    const addMessage = (message) => {
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('message');
-        messageDiv.innerHTML = `<span class="user">User:</span> ${message}`;
-        chatBox.appendChild(messageDiv);
-        chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
-    };
-
-    sendButton.addEventListener('click', () => {
+    function sendMessage() {
         const message = messageInput.value.trim();
         if (message) {
-            addMessage(message);
-            messageInput.value = '';
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("message");
+            messageElement.textContent = message;
+            chatWindow.appendChild(messageElement);
+            messageInput.value = "";
+            chatWindow.scrollTop = chatWindow.scrollHeight;
         }
-    });
+    }
 
-    messageInput.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            sendButton.click();
+    sendButton.addEventListener("click", sendMessage);
+
+    messageInput.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            sendMessage();
         }
     });
 });
